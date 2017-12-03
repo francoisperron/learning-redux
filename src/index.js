@@ -1,9 +1,10 @@
-import { createStore } from 'redux'
+// import { createStore } from 'redux'
 import { counter } from './counter'
+import { myCreateStore } from './my-store'
 
-const store = createStore(counter)
+// const store = createStore(counter)
+const store = myCreateStore(counter)
 
-// holds app state
 console.log(store.getState())
 
 store.subscribe(() => {
@@ -11,6 +12,6 @@ store.subscribe(() => {
   console.log(store.getState())
 })
 
-// allows to dispatch actions
 store.dispatch({type: 'INCREMENT'})
-
+store.dispatch({type: 'INCREMENT'})
+store.dispatch({type: 'DECREMENT'})
