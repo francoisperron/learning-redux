@@ -1,0 +1,38 @@
+{
+  "name": "learning-redux",
+  "version": "0.0.0-dev",
+  "main": "src/index.js",
+  "private": true,
+  "engines": {
+    "node": ">=8"
+  },
+  "engineStrict": true,
+  "scripts": {
+    "pretest": "standard",
+    "test": "mocha \"src/**/*.spec.js\"",
+    "lint": "standard",
+    "lint:fix": "standard --fix"
+  },
+  "standard": {
+    "parser": "babel-eslint",
+    "globals": [
+      "config"
+    ]
+  },
+  "devDependencies": {
+    "babel-eslint": "8.0.2",
+    "babel-preset-env": "1.6.1",
+    "babel-preset-react": "6.24.1",
+    "babel-preset-stage-2": "6.24.1",
+    "babel-register": "6.26.0",
+    "chai": "4.1.2",
+    "mocha": "4.0.1",
+    "standard": "10.0.3"
+  },
+  "dependencies": {
+    "react": "16.2.0",
+    "react-dom": "16.2.0",
+    "react-redux": "5.0.6",
+    "redux": "3.7.2"
+  }
+}
