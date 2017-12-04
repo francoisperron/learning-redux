@@ -1,17 +1,27 @@
 // import { createStore } from 'redux'
+import React from 'react'
+import ReactDOM from 'react-dom'
 import { counter } from './counter'
 import { myCreateStore } from './my-store'
 
-// const store = createStore(counter)
 const store = myCreateStore(counter)
 
-console.log(store.getState())
+const Counter = ({value}) => (
+  <div>{value}</div>
+)
+
+const render = () => {
+  ReactDOM.render(<Counter value={store.getState()}/>, document.querySelector('#root'))
+}
 
 store.subscribe(() => {
-  console.log('changed')
-  console.log(store.getState())
+  console.log('store changed : ' + store.getState());
+  render()
 })
 
 store.dispatch({type: 'INCREMENT'})
 store.dispatch({type: 'INCREMENT'})
+store.dispatch({type: 'DECREMENT'})
+store.dispatch({type: 'DECREMENT'})
+store.dispatch({type: 'DECREMENT'})
 store.dispatch({type: 'DECREMENT'})

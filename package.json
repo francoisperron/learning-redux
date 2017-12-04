@@ -8,6 +8,8 @@
   },
   "engineStrict": true,
   "scripts": {
+    "build": "webpack -p",
+    "start": "webpack-dev-server",
     "pretest": "standard",
     "test": "mocha \"src/**/*.spec.js\"",
     "lint": "standard",
@@ -21,13 +23,16 @@
   },
   "devDependencies": {
     "babel-eslint": "8.0.2",
+    "babel-loader": "^7.1.2",
     "babel-preset-env": "1.6.1",
     "babel-preset-react": "6.24.1",
     "babel-preset-stage-2": "6.24.1",
     "babel-register": "6.26.0",
     "chai": "4.1.2",
     "mocha": "4.0.1",
-    "standard": "10.0.3"
+    "standard": "10.0.3",
+    "webpack": "^3.10.0",
+    "webpack-dev-server": "^2.9.5"
   },
   "dependencies": {
     "react": "16.2.0",
