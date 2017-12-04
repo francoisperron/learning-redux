@@ -21,6 +21,6 @@ const render = () => {
   ReactDOM.render(counter, document.querySelector('#root'))
 }
 
-store.subscribe(() => {render()})
+store.subscribe(render)
 
 render()
