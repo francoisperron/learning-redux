@@ -1,14 +1,16 @@
 import React from 'react'
 import { todos } from './todos'
-import { myCreateStore } from '../my-store'
+import { myCombine, myCreateStore } from '../my-store'
 import { filters } from './filters'
 
 const run = () => {
 
-  const todoApp = (state = {}, action) => ({
-      todos: todos(state.todos, action),
-      visibilityFilter: filters(state.visibilityFilter, action)
-    })
+  // const todoApp = (state = {}, action) => ({
+  //   todos: todos(state.todos, action),
+  //   visibilityFilter: filters(state.visibilityFilter, action)
+  // })
+
+  const todoApp = myCombine({todos, filters})
 
   const store = myCreateStore(todoApp)
 
