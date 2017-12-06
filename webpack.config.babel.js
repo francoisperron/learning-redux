@@ -14,7 +14,7 @@ module.exports = {
   resolve: {extensions: ['.js']},
   devtool: 'source-map',
   devServer: {
-    port: 10000,
+    port: 5050,
     historyApiFallback: true,
     open: true,
     contentBase: './',
