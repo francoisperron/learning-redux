@@ -20,11 +20,6 @@ const myCreateStore = (reducer) => {
   return {getState, dispatch, subscribe}
 }
 
-// replaces
-// const todoApp = (state = {}, action) => ({
-//   todos: todos(state.todos, action),
-//   visibilityFilter: filters(state.visibilityFilter, action)
-// })
 const myCombine = (reducers) => {
   return (state = {}, action) => {
     return Object.keys(reducers).reduce((nextState, key) => {
