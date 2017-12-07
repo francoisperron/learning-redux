@@ -1,4 +1,5 @@
 import React from 'react'
+import PropsType from 'prop-types'
 import { TodoItem } from './TodoItem'
 
 const filteredTodos = (filters, todos) => {
@@ -14,7 +15,7 @@ const filteredTodos = (filters, todos) => {
 export class VisibleTodoList extends React.Component {
 
   componentDidMount () {
-    this.unsubscribe = this.props.store.subscribe(() => {
+    this.unsubscribe = this.context.store.subscribe(() => {
       this.forceUpdate()
     })
   }
@@ -24,11 +25,13 @@ export class VisibleTodoList extends React.Component {
   }
 
   render () {
-    const state = this.props.store.getState()
-    return <TodoList todos={filteredTodos(state.filters, state.todos)}
-                     onTodoClick={id => this.props.store.dispatch({type: 'TOGGLE_TODO', id})} />
+    const {filters, todos} = this.context.store.getState()
+    return <TodoList todos={filteredTodos(filters, todos)}
+                     onTodoClick={id => this.context.store.dispatch({type: 'TOGGLE_TODO', id})} />
   }
 }
+
+VisibleTodoList.contextTypes = {store: PropsType.object}
 
 export const TodoList = ({todos, onTodoClick}) => (
   <ul>

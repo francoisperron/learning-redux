@@ -1,9 +1,10 @@
 import React from 'react'
+import PropsType from 'prop-types'
 
 export class FilterLink extends React.Component {
 
   componentDidMount () {
-    this.unsubscribe = this.props.store.subscribe(() => {
+    this.unsubscribe = this.context.store.subscribe(() => {
       this.forceUpdate()
     })
   }
@@ -13,12 +14,14 @@ export class FilterLink extends React.Component {
   }
 
   render () {
-    const currentFilter = this.props.store.getState().filters
-    const onFilterClick = () => this.props.store.dispatch({type: 'SET_VISIBILITY_FILTER', filter: this.props.filter})
+    const currentFilter = this.context.store.getState().filters
+    const onFilterClick = () => this.context.store.dispatch({type: 'SET_VISIBILITY_FILTER', filter: this.props.filter})
 
     return <Link active={this.props.filter === currentFilter} onClick={onFilterClick}>{this.props.children}</Link>
   }
 }
+FilterLink.contextTypes = {store: PropsType.object}
+
 
 const Link = ({active, onClick, children}) => {
   const onLinkClick = e => {
