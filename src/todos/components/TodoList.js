@@ -1,7 +1,8 @@
 import React from 'react'
-import PropsType from 'prop-types'
 import { TodoItem } from './TodoItem'
 import { withStore } from '../../provide-store'
+
+const toggleTodo = (id) => ({type: 'TOGGLE_TODO', id})
 
 const filteredTodos = (filters, todos) => {
   if (filters === 'SHOW_COMPLETED') {
@@ -15,8 +16,7 @@ const filteredTodos = (filters, todos) => {
 
 export const VisibleTodoList = withStore(({store}) => {
   const {filters, todos} = store.getState()
-  return <TodoList todos={filteredTodos(filters, todos)}
-                   onTodoClick={id => store.dispatch({type: 'TOGGLE_TODO', id})} />
+  return <TodoList todos={filteredTodos(filters, todos)} onTodoClick={id => store.dispatch(toggleTodo(id))} />
 
 })
 
