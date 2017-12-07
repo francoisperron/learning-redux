@@ -1,6 +1,6 @@
 import React from 'react'
 import { withStore } from '../../provide-store'
-
+import { Link } from './Link'
 
 export const FilterLink = withStore(({store, filter, children}) => {
   const currentFilter = store.getState().filters
@@ -8,14 +8,3 @@ export const FilterLink = withStore(({store, filter, children}) => {
 
   return <Link active={filter === currentFilter} onClick={onFilterClick}>{children}</Link>
 })
-
-const Link = ({active, onClick, children}) => {
-  const onLinkClick = e => {
-    e.preventDefault()
-    onClick()
-  }
-
-  return active
-    ? <span>{children}</span>
-    : <a href='#' onClick={onLinkClick}>{children}</a>
-}
