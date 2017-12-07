@@ -1,7 +1,27 @@
 import React from 'react'
 
-export const FilterLink = ({filter, currentFilter, children, store}) => {
-  return currentFilter === filter
+export class FilterLink extends React.Component {
+
+  componentDidMount () {
+    this.unsubscribe = this.props.store.subscribe(() => {
+      this.forceUpdate()
+    })
+  }
+
+  componentWillUnmount () {
+    this.unsubscribe()
+  }
+
+  render () {
+    const currentFilter = this.props.store.getState().filters
+    const onFilterClick = () => this.props.store.dispatch({type: 'SET_VISIBILITY_FILTER', filter: this.props.filter})
+
+    return <Link active={this.props.filter === currentFilter} onClick={onFilterClick}>{this.props.children}</Link>
+  }
+}
+
+const Link = ({active, onClick, children}) => {
+  return active
     ? <span>{children}</span>
-    : <a href='#' onClick={() => store.dispatch({type: 'SET_VISIBILITY_FILTER', filter: filter})}>{children}</a>
+    : <a href='#' onClick={onClick}>{children}</a>
 }
