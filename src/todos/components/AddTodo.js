@@ -1,9 +1,9 @@
 import React from 'react'
-import PropsType from 'prop-types'
+import { withStore } from '../../provide-store'
 
 let nextTodoId = 0
-export const AddTodo = (props, {store}) => {
-  let input = ''
+export const AddTodo = withStore(({store}) => {
+  let input
   return (
     <div>
       <input ref={node => input = node} />
@@ -14,6 +14,6 @@ export const AddTodo = (props, {store}) => {
       </button>
     </div>
   )
-}
-AddTodo.contextTypes = {store: PropsType.object}
+})
+
 

@@ -14,3 +14,25 @@ export class ProvideStore extends React.Component {
 }
 
 ProvideStore.childContextTypes = {store: PropsType.object}
+
+export const withStore = (Component) => {
+  return class ComponentWithStore extends React.Component {
+    static contextTypes = {
+      store: PropsType.object
+    }
+
+    componentDidMount () {
+      this.unsubscribe = this.context.store.subscribe(() => {
+        this.forceUpdate()
+      })
+    }
+
+    componentWillUnmount () {
+      this.unsubscribe()
+    }
+
+    render () {
+      return <Component store={this.context.store} {...this.props} />
+    }
+  }
+}

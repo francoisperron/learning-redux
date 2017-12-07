@@ -1,27 +1,13 @@
 import React from 'react'
-import PropsType from 'prop-types'
+import { withStore } from '../../provide-store'
 
-export class FilterLink extends React.Component {
 
-  componentDidMount () {
-    this.unsubscribe = this.context.store.subscribe(() => {
-      this.forceUpdate()
-    })
-  }
+export const FilterLink = withStore(({store, filter, children}) => {
+  const currentFilter = store.getState().filters
+  const onFilterClick = () => store.dispatch({type: 'SET_VISIBILITY_FILTER', filter: filter})
 
-  componentWillUnmount () {
-    this.unsubscribe()
-  }
-
-  render () {
-    const currentFilter = this.context.store.getState().filters
-    const onFilterClick = () => this.context.store.dispatch({type: 'SET_VISIBILITY_FILTER', filter: this.props.filter})
-
-    return <Link active={this.props.filter === currentFilter} onClick={onFilterClick}>{this.props.children}</Link>
-  }
-}
-FilterLink.contextTypes = {store: PropsType.object}
-
+  return <Link active={filter === currentFilter} onClick={onFilterClick}>{children}</Link>
+})
 
 const Link = ({active, onClick, children}) => {
   const onLinkClick = e => {
