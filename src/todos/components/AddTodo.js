@@ -1,9 +1,8 @@
 import React from 'react'
 import { withStore } from '../../provide-store'
+import uuid from 'uuid'
 
-let nextTodoId = 0
-const addTodo = (text) => ({type: 'ADD_TODO', id: nextTodoId++, text})
-
+const addTodo = (text) => ({type: 'ADD_TODO', id: uuid.v4(), text})
 
 export const AddTodo = withStore(({store}) => {
   let input

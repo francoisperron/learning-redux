@@ -1,4 +1,4 @@
-const myCreateStore = (reducer) => {
+const myCreateStore = (reducer, originalState = {}) => {
   let state
   let listeners = []
 
@@ -15,6 +15,7 @@ const myCreateStore = (reducer) => {
     listeners.forEach(listener => listener())
   }
 
+  state = originalState
   dispatch({})
 
   return {getState, dispatch, subscribe}
@@ -23,9 +24,9 @@ const myCreateStore = (reducer) => {
 const myCombine = (reducers) => {
   return (state = {}, action) => {
     return Object.keys(reducers).reduce((nextState, key) => {
-        nextState[key] = reducers[key](state[key], action)
-        return nextState
-      }, {})
+      nextState[key] = reducers[key](state[key], action)
+      return nextState
+    }, {})
   }
 }
 
