@@ -1,25 +1,11 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import { myCombine, myCreateStore } from '../my-store'
-import { todos } from './todos'
-import { filters } from './filters'
-import { TodoPage } from './components/TodoPage'
-import { ProvideStore } from '../provide-store'
-import { loadState, saveState } from '../local-storage'
+import { render } from 'react-dom'
+import { configureStore } from './store'
+import { Root } from './components/Root'
 
 const run = () => {
-  const persistedTodos = loadState()
-
-  const todoApp = myCombine({todos, filters})
-  const store = myCreateStore(todoApp, persistedTodos)
-
-  store.subscribe(() => saveState({todos: store.getState().todos}))
-
-  ReactDOM.render(
-    <ProvideStore store={store}>
-      <TodoPage />
-    </ProvideStore>,
-    document.querySelector('#root'))
+  const store = configureStore()
+  render(<Root store={store} />, document.querySelector('#root'))
 }
 
 export { run }
