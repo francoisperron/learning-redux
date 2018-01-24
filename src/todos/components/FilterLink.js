@@ -1,8 +1,7 @@
 import React from 'react'
 import { withStore } from '../../provide-store'
 import { Link } from './Link'
-
-const setVisibilityFilter = (filter) => ({type: 'SET_VISIBILITY_FILTER', filter})
+import { setVisibilityFilter } from '../actions'
 
 export const FilterLink = withStore(({store, filter, children}) => {
   const currentFilter = store.getState().filters
