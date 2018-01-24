@@ -30,4 +30,14 @@ const myCombine = (reducers) => {
   }
 }
 
-export { myCreateStore, myCombine }
+const addPromiseSupportToDispatch = (store) => {
+  const actionDispatch = store.dispatch
+  return (action) => {
+    if (typeof action.then === 'function') {
+      return action.then(actionDispatch)
+    }
+    return actionDispatch(action)
+  }
+}
+
+export { myCreateStore, myCombine, addPromiseSupportToDispatch }

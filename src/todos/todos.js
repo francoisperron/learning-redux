@@ -12,6 +12,10 @@ const todos = (todoList = [], action) => {
     return todoList.map(t => t.id === action.id ? todo.toggle(t) : t)
   }
 
+  if (action.type === 'RECEIVE_TODOS') {
+    return action.todos
+  }
+
   return todoList
 }
 
